@@ -75,7 +75,7 @@
                         <td>{{ x.precio}}</td>
                         <td>{{ x.descripcion}}</td>
                         {% if  x.producto_imagen %}
-                        <td><img src="/{{ x.producto_imagen}}" height="50" width="50"></td>
+                        <td><img src=" {{ x.producto_imagen.url }} " height="50" width="50"></td>
                         {% else %}
                         <td></td>
                         {% endif %}
