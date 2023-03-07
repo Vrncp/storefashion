@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Alta de Departamento</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/guardarDepto/" method="post" >
+                    {% csrf_token%}                    
+                    <div class="form-group y-3">
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"   required>             
+                    </div>
+                    <br>
+                    <div class="form-group y-3">
+                        <input type="text" id="nombre2" name="nombre2" class="form-control" placeholder="Descripcion"  >             
+                    </div>                   
+                    <div class="form-group py-2">
+                        <button class="btn btn-primary">
+                            Guardar
+                        </button>          
+                    </div>
+                          
+                    </form>            
+                </form>   
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive">
+            <h1>Listado de Departamentos</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Creador por</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dep in deptos %}
+                    <tr>
+                        <td>{{ dep.nombre}}</td>
+                        <td>{{ dep.detalle}}</td>
+                        <td>{{dep.user.username}}</td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

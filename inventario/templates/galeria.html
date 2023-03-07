@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Departamento
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            {% for dep in deptos %}
+            <div class="accordion-item d-grid gap-2">              
+              <button  type="button" class="btn btn-light">
+                {{dep.nombre}}
+              </button>              
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Tipo Mercancia
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+           
+              {% for x in tipo %}
+              <div class="accordion-item  d-grid gap-2">              
+                <button  type="button" class="btn btn-light">
+                  {{ x.Tipo }}
+                </button>              
+              </div>
+              {% endfor %}
+           
+          </div>
+        </div>          
+      </div>  
+    </div> 
+  </div>  
+  <div class="col-sm-6 col-md-6 col-lg-8 col-xl-10" >
+    <div class="container text-center">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+        {% for p in object_list.all %} 
+        {% if p.producto_imagen %}       
+          <div class="col py-2">            
+            <div class="panel panel-default" >
+              <h3 >{{ p.nombre }}</h3>
+            </div>           
+            <div class="panel-body">                
+                  <a href="">
+                      <img src="/{{ p.producto_imagen }}" style="width:100px;height:100px;"/>
+                  </a><br>                  
+                    {{ p.precio }}
+                 
+                     
+            </div> 
+            <div class="panel-footer" >              
+              {% if p.descripcion %}
+                        {{ p.descripcion }}
+                   
+                    {% endif %}
+            </div>                  
+          </div>
+          {%  endif %}
+        {% endfor %}  
+      </div>
+      </div>
+  </div>  
+  
+ 
+</div>
+{% endblock content %}

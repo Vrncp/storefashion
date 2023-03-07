@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h1>Alta de Producto</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/guardarProducto/" method="POST"  enctype="multipart/form-data">
+                    {% csrf_token%}
+                    <div class="form-group py-2">
+                        <input type="text" id="codigo" name="codigo" class="form-control" placeholder="Codigo" minlength="6"  required>             
+                    </div>
+                    <div class="form-grouppy-2">
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" minlength="6"  required>             
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion"  required>          
+                    </div>
+                    <div class="form-grouppy-2">
+                        <input type="text" id="precio" name="precio" class="form-control" placeholder="Precio" minlength="6"  required>             
+                    </div>
+                    <div class="form-group py-2">                        
+                        <input type="file" name="images" class="form-control">  
+                    </div>
+                    <div class="form-group">              
+                        <select id="departamento py-2" name="departamento" class="form-select form-select-sm" >
+                            <option value="">Departamento</option>
+                            {% for x in deptos %}                                               
+                            <option value="{{ x.id}}">{{ x.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group py-2" >              
+                        <select id="tipoMercancia" name="tipoMercancia" class="form-select form-select-sm">
+                            <option value="">Tipo Mercancia</option>
+                            {% for x in tipo %}                                               
+                            <option value="{{ x.id}}">{{ x.Tipo}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">
+                            Guardar
+                        </button>          
+                    </div>
+                          
+                    </form>            
+                </form>   
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive py-2">
+            <h1>Listado de Productos</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripcion</th>
+                        <th>Imagen</th>
+                        <th>Creador por</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in products %}
+                    <tr>  
+                        <td>{{ x.codigo}}</td>                      
+                        <td>{{ x.nombre}}</td>
+                        <td>{{ x.precio}}</td>
+                        <td>{{ x.descripcion}}</td>
+                        {% if  x.producto_imagen %}
+                        <td><img src="/{{ x.producto_imagen}}" height="50" width="50"></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        
+                        <td>{{x.user.username}}</td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
