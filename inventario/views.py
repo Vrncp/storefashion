@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):   
     return render(request,'home.html')
 def menu(request):   
-    return render(request,'menulateral.html')    
+    return render(request,'prueba.html')    
 def galeria(request):   
     object_list = Producto.objects.all()
     deptos = Departamento.objects.all()
